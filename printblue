@@ -1,0 +1,266 @@
+# -*- coding: utf-8 -*-
+# Õâ¸öÓÃÓÚÔÚÖÕ¶ËÉÏ´òÓ¡´øÓÐÑÕÉ«µÄÌáÊ¾ÐÅÏ¢ ·½±ãÏÔÊ¾
+
+
+
+'''
+        ´ËÀàÖ§³ÖWindows¿ØÖÆÌ¨´òÓ¡×ÖÌå
+        ×ÖÌåÑÕÉ«¶¨Òå ,¹Ø¼üÔÚÓÚÑÕÉ«±àÂë£¬ÓÉ2Î»Ê®Áù½øÖÆ×é³É£¬·Ö±ðÈ¡0~f£¬Ç°Ò»Î»Ö¸µÄÊÇ±³¾°É«£¬ºóÒ»Î»Ö¸µÄÊÇ×ÖÌåÉ«
+        ÓÉÓÚ¸Ãº¯ÊýµÄÏÞÖÆ£¬Ó¦¸ÃÊÇÖ»ÓÐÕâ16ÖÖ£¬¿ÉÒÔÇ°¾°É«Óë±³¾°É«×éºÏ¡£Ò²¿ÉÒÔ¼¸ÖÖÑÕÉ«Í¨¹ý»òÔËËã×éºÏ£¬×éºÏºó»¹ÊÇÔÚÕâ16ÖÖÑÕÉ«ÖÐ
+        ÔÝÊ±Ö»ÓÐ×ÖÌåÉ«£¬ºóÐø¸ù¾ÝÐèÇó¿ÉÌí¼Ó±³¾°É«+×ÖÌåÉ«×éºÏ
+'''
+import sys
+import ctypes
+
+class WindowsCMDColorPrint(object):
+
+    #ÉèÖÃÊä³öÀà±ð±êÖ¾
+    __stdInputHandle = -10
+    __stdOutputHandle = -11
+    __stdErrorHandle = -12
+    # Windows CMDÃüÁîÐÐ×ÖÌåÑÕÉ«¶¨Òå
+    __foreGroundBLACK = 0x00  # black.
+    __foreGroundDARKBLUE = 0x01  # darkBlue.
+    __foreGroundDARKGREEN = 0x02  # darkGreen.
+    __foreGroundDARKSKYBLUE = 0x03  # darkSkyBlue.
+    __foreGroundDARKRED = 0x04  # darkRed.
+    __foreGroundDARKPINK = 0x05  # darkPink.
+    __foreGroundDARKYELLOW = 0x06  # darkYellow.
+    __foreGroundDARKWHITE = 0x07  # darkWhite.
+    __foreGroundDARKGRAY = 0x08  # darkGray.
+    __foreGroundBLUE = 0x09  # blue.
+    __foreGroundGREEN = 0x0a  # green.
+    __foreGroundSKYBLUE = 0x0b  # skyBlue.
+    __foreGroundRED = 0x0c  # red.
+    __foreGroundPINK = 0x0d  # pink.
+    __foreGroundYELLOW = 0x0e  # yellow.
+    __foreGroundWHITE = 0x0f  # white.
+    # Windows CMDÃüÁîÐÐ ±³¾°ÑÕÉ«¶¨Òå
+    __backGroundDARKBLUE = 0x10  # darkBlue.
+    __backGroundDARKGREEN = 0x20  # darkGreen.
+    __backGroundDARKSKYBLUE = 0x30  # darkSkyBlue.
+    __backGroundDARKRED = 0x40  # darkRed.
+    __backGroundDARKPINK = 0x50  # darkPink.
+    __backGroundDARKYELLOW = 0x60  # darkYellow.
+    __backGroundDARKWHITE = 0x70  # darkWhite.
+    __backGroundDARKGRAY = 0x80  # darkGray.
+    __backGroundBLUE = 0x90  # blue.
+    __backGroundGREEN = 0xa0  # green.
+    __backGroundSKYBLUE = 0xb0  # skyBlue.
+    __backGroundRED = 0xc0  # red.
+    __backGroundPINK = 0xd0  # pink.
+    __backGroundYELLOW = 0xe0  # yellow.
+    __backGroundWHITE = 0xf0  # white.
+
+
+    stdOutHandle=ctypes.windll.kernel32.GetStdHandle(__stdOutputHandle)
+
+    def setCmdColor(self,color,handle=stdOutHandle):
+        return ctypes.windll.kernel32.SetConsoleTextAttribute(handle, color)
+
+    def resetCmdColor(self):
+        self.setCmdColor(self.__foreGroundRED | self.__foreGroundGREEN | self.__foreGroundBLUE)
+
+    #°µÀ¶É«
+    #dark blue
+    def printDarkBlue(self,msg):
+        self.setCmdColor(self.__foreGroundDARKBLUE)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µÂÌÉ«
+    #dark green
+    def printDarkGreen(self,msg):
+        self.setCmdColor(self.__foreGroundDARKGREEN)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µÌìÀ¶É«
+    #dark sky blue
+    def printDarkSkyBlue(self,msg):
+        self.setCmdColor(self.__foreGroundDARKSKYBLUE)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µºìÉ«
+    #dark red
+    def printDarkRed(self,msg):
+        self.setCmdColor(self.__foreGroundDARKRED)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µ·ÛºìÉ«
+    #dark pink
+    def printDarkPink(self,msg):
+        self.setCmdColor(self.__foreGroundDARKPINK)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µ»ÆÉ«
+    #dark yellow
+    def printDarkYellow(self,msg):
+        self.setCmdColor(self.__foreGroundDARKYELLOW)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µ°×É«
+    #dark white
+    def printDarkWhite(self,msg):
+        self.setCmdColor(self.__foreGroundDARKWHITE)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°µ»ÒÉ«
+    #dark gray
+    def printDarkGray(self,msg):
+        self.setCmdColor(self.__foreGroundDARKGRAY)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #À¶É«
+    #blue
+    def printBlue(self,msg):
+        self.setCmdColor(self.__foreGroundBLUE)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #ÂÌÉ«
+    #green
+    def printGreen(self,msg):
+        self.setCmdColor(self.__foreGroundGREEN)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #ÌìÀ¶É«
+    #sky blue
+    def printSkyBlue(self,msg):
+        self.setCmdColor(self.__foreGroundSKYBLUE)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #ºìÉ«
+    #red
+    def printRed(self,msg):
+        self.setCmdColor(self.__foreGroundRED)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #·ÛºìÉ«
+    #pink
+    def printPink(self,msg):
+        self.setCmdColor(self.__foreGroundPINK)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #»ÆÉ«
+    #yellow
+    def printYellow(self,msg):
+        self.setCmdColor(self.__foreGroundYELLOW)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+    #°×É«
+    #white
+    def printWhite(self,msg):
+        self.setCmdColor(self.__foreGroundWHITE)
+        sys.stdout.write(msg)
+        self.resetCmdColor()
+
+
+
+# linuxµÄconsoleÑÕÉ«´òÓ¡
+#   ¸ñÊ½£º\033[ÏÔÊ¾·½Ê½;Ç°¾°É«;±³¾°É«m
+#   ËµÃ÷:
+#
+#   Ç°¾°É«            ±³¾°É«            ÑÕÉ«
+#   ---------------------------------------
+#     30                40              ºÚÉ«
+#     31                41              ºìÉ«
+#     32                42              ÂÌÉ«
+#     33                43              üSÉ«
+#     34                44              À¶É«
+#     35                45              ×ÏºìÉ«
+#     36                46              ÇàÀ¶É«
+#     37                47              °×É«
+#
+#   ÏÔÊ¾·½Ê½           ÒâÒå
+#   -------------------------
+#      0           ÖÕ¶ËÄ¬ÈÏÉèÖÃ
+#      1             ¸ßÁÁÏÔÊ¾
+#      4            Ê¹ÓÃÏÂ»®Ïß
+#      5              ÉÁË¸
+#      7             ·´°×ÏÔÊ¾
+#      8              ²»¿É¼û
+#
+#   Àý×Ó£º
+#   \033[1;31;40m    <!--1-¸ßÁÁÏÔÊ¾ 31-Ç°¾°É«ºìÉ«  40-±³¾°É«ºÚÉ«-->
+#   \033[0m          <!--²ÉÓÃÖÕ¶ËÄ¬ÈÏÉèÖÃ£¬¼´È¡ÏûÑÕÉ«ÉèÖÃ-->]]]
+
+class LinuxCMDColorPrint():
+    STYLE = {
+        'fore':
+            {  # Ç°¾°É«
+               'black': 30,  # ºÚÉ«
+               'red': 31,  #  ºìÉ«
+               'green': 32,  #  ÂÌÉ«
+               'yellow': 33,  #  »ÆÉ«
+               'blue': 34,  #  À¶É«
+               'purple': 35,  #  ×ÏºìÉ«
+               'cyan': 36,  #  ÇàÀ¶É«
+               'white': 37,  #  °×É«
+               },
+
+        'back':
+            {  # ±³¾°
+               'black': 40,  # ºÚÉ«
+               'red': 41,  #  ºìÉ«
+               'green': 42,  #  ÂÌÉ«
+               'yellow': 43,  #  »ÆÉ«
+               'blue': 44,  #  À¶É«
+               'purple': 45,  #  ×ÏºìÉ«
+               'cyan': 46,  #  ÇàÀ¶É«
+               'white': 47,  #  °×É«
+               },
+
+        'mode':
+            {  # ÏÔÊ¾Ä£Ê½
+               'mormal': 0,  # ÖÕ¶ËÄ¬ÈÏÉèÖÃ
+               'bold': 1,  #  ¸ßÁÁÏÔÊ¾
+               'underline': 4,  #  Ê¹ÓÃÏÂ»®Ïß
+               'blink': 5,  #  ÉÁË¸
+               'invert': 7,  #  ·´°×ÏÔÊ¾
+               'hide': 8,  #  ²»¿É¼û
+               },
+
+        'default':
+            {
+                'end': 0,
+            },
+    }
+    def UseStyle(self,msg, mode = '', fore = '', back = ''):
+
+        mode  = '%s' % self.STYLE['mode'][mode]if self.STYLE['mode'].has_key(mode) else ''
+        fore  = '%s' % self.STYLE['fore'][fore] if self.STYLE['fore'].has_key(fore) else ''
+        back  = '%s' % self.STYLE['back'][back] if self.STYLE['back'].has_key(back) else ''
+        style = ';'.join([s for s in [mode, fore, back] if s])
+        style = '\033[%sm' % style if style else ''
+        end   = '\033[%sm' % self.STYLE['default']['end'] if style else ''
+        return '%s%s%s' % (style, msg, end)
+
+
+    def printRed(self,msg):
+        return self.UseStyle(msg,fore='red')
+    def printBlack(self,msg):
+        return self.UseStyle(msg,fore='black')
+    def printGreen(self,msg):
+        return self.UseStyle(msg,fore='green')
+    def printYellow(self,msg):
+        return self.UseStyle(msg,fore='yellow')
+    def printBlue(self,msg):
+        return self.UseStyle(msg,fore='blue')
+    def printPurple(self,msg):
+        return self.UseStyle(msg,fore='purple')
+    def printCyan(self,msg):
+        return self.UseStyle(msg,fore='cyan')
+    def printWhite(self,msg):
+        return self.UseStyle(msg,fore='white')
